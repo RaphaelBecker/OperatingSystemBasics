@@ -127,10 +127,8 @@ int main(void) // C-Standard: Wenn in main kein Rückgabewert definiert wird 0 z
     {
         err("calloc");
     }
-    // printf("Hello from %i\n", getpid());   // Gibt Process Id vom Elternprozess zurück
     pThreadCreate_nTimes(n, threads); // Erstellt n Threads (Entspricht semantisch der Prozesserstellung)
     pThreadjoin_nTimes(n, threads);   // Die Funktion pthread_join() wartet auf die Beendigung des von thread spezifizierten Threads
-    //printf("Goodbye from %i\n", getpid()); // Kind und elternprozess geben Ihre PID aus
 
     // Alle Threads sind terminiert
     puts("All threads joined\n");
