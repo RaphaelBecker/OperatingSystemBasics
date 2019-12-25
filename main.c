@@ -79,14 +79,14 @@ void readEndFromUserImput(void)
 
 void *start_routine(void *arg)
 {
-    (void)arg; // cast um Compilerwarnung zu unterdruecken
-    if (printf("Thread %lu started\n", pthread_self()) < 0)
+    (void)arg;                                              // cast um Compilerwarnung zu unterdruecken
+    if (printf("Thread %lu started\n", pthread_self()) < 0) // Gibt Thread ID aus
     {
         err("printf");
     }
     readEndFromUserImput();
 
-    if (printf("Thread %lu terminated\n", pthread_self()) < 0)
+    if (printf("Thread %lu terminated\n", pthread_self()) < 0) // Gibt Thread ID aus
     {
         err("printf\n");
     }
@@ -99,7 +99,7 @@ void pThreadCreate_nTimes(unsigned n, pthread_t *threads)
     for (unsigned i = 0; i < n; ++i)
     {
         int er;
-        if ((er = pthread_create(&threads[i], NULL, start_routine, NULL)))
+        if ((er = pthread_create(&threads[i], NULL, start_routine, NULL))) /*  Die Funktion pthread_create() startet einen neuen Thread im aufrufenden Prozess.  Der neue Thread startet die Ausführung durch den Aufruf von start_routine(); arg ist Argument von start_routine(). */
         {
             err2(er, "ptherad_create");
         }
@@ -111,7 +111,7 @@ void pThreadjoin_nTimes(unsigned n, const pthread_t *threads)
     for (unsigned i = 0; i < n; ++i)
     {
         int er;
-        if ((er = pthread_join(threads[i], NULL)))
+        if ((er = pthread_join(threads[i], NULL))) /* Die Funktion pthread_join() wartet auf die Beendigung des von thread spezifizierten Threads.  Wenn dieser Thread bereits beendet ist, kehrt pthread_join() sofort zurück. (Zweites Argument waere ein Pointer um den Exitstatus des Threads zu speichern, hier NULL)*/
         {
             err2(er, "pthread_join");
         }
